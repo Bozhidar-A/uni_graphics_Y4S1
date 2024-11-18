@@ -3,35 +3,47 @@ extends Node3D
 @export var cylinderHeight: float = 1
 @export var spawnHolderNode: Node3D
 
+const coneLookGoodCut = 2  # Adjust cone height for appearance
+
 var cylinder: CSGCylinder3D
 var cone: CSGCylinder3D
+var box: CSGBox3D
 
 func _ready():
-	# init cylendar
+	# Create the cylinder
 	cylinder = CSGCylinder3D.new()
 	cylinder.height = cylinderHeight
 	cylinder.radius = 0.3
 	spawnHolderNode.add_child(cylinder)
 
-	# init cone
+	# Create the cone
 	cone = CSGCylinder3D.new()
 	cone.cone = true
-	cone.height = cylinderHeight/2 #to look good /3?
+	cone.height = cylinderHeight / coneLookGoodCut
 	cone.radius = 0.5
-	var initPos = calculate_cone_offset(cylinderHeight, cylinderHeight/2)
-	cone.translate(initPos) # put it ontop (hopefuly)
-	spawnHolderNode.add_child(cone) #add to scnene
-	
-func calculate_cone_offset(cylinder_height: float, cone_height: float) -> Vector3:
-	# high reduces equaly from both top and bottom so the top of the cylinder moves by half the change in height
-	var offset_y = cylinder_height / 2 + cone_height / 2
+	cone.transform.origin = calculate_offset(cylinderHeight, cone.height, true)  # Position on top
+	spawnHolderNode.add_child(cone)
+
+	# Create the box
+	box = CSGBox3D.new()
+	box.size = Vector3(1, 0.5, 1)
+	box.transform.origin = calculate_offset(cylinderHeight, box.size.y, false)  # Position at bottom
+	spawnHolderNode.add_child(box)
+
+func calculate_offset(cylinder_height: float, target_height: float, is_top: bool) -> Vector3:
+	# Calculate offset to position object on top or bottom of the cylinder
+	var offset_y = cylinder_height / 2 + target_height / 2
+	if not is_top:
+		offset_y *= -1
 	return Vector3(0, offset_y, 0)
 
-
-func set_cylinder_height(newHeight: float):
-	cylinderHeight = newHeight
-	
+func update_cylinder_height(new_height: float):
+	# Update the cylinder height
+	cylinderHeight = new_height
 	cylinder.height = cylinderHeight
 
-	var matchedPos = calculate_cone_offset
-	cone.translate(matchedPos)
+	# Update cone position
+	cone.transform.origin = calculate_offset(cylinderHeight, cone.height, true)
+
+	# Update box position
+	box.transform.origin = calculate_offset(cylinderHeight, box.size.y, false)
