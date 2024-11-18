@@ -1,9 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://dos6qav7myn1"]
+[gd_scene load_steps=3 format=3 uid="uid://dos6qav7myn1"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_g1lok"]
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_uv3lt"]
+
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("spawnHolderNode")]
 script = ExtResource("1_g1lok")
+spawnHolderNode = NodePath("MeshGrabbable")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.69906)
+
+[node name="MeshGrabbable" type="RigidBody3D" parent="."]
+gravity_scale = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshGrabbable"]
+transform = Transform3D(0.434455, 0, 0, 0, 1, 0, 0, 0, 0.322789, 0, 0, 0)
+shape = SubResource("BoxShape3D_uv3lt")
