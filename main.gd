@@ -14,6 +14,7 @@ func _ready():
 	cylinder = CSGCylinder3D.new()
 	cylinder.height = cylinderHeight
 	cylinder.radius = 0.3
+	ApplyColorToObject(cylinder, Color(1,0,0))
 	spawnHolderNode.add_child(cylinder)
 
 	# Create the cone
@@ -36,6 +37,17 @@ func CalculateDffsetFromCylinder(cylinderHeight: float, targetHeight: float, isT
 	if not isTop:
 		offsetY *= -1
 	return Vector3(0, offsetY, 0)
+	
+func ApplyColorToObject(object: Node3D, color: Color):
+	# Create a new StandardMaterial3D
+	var material = StandardMaterial3D.new()
+	material.albedo_color = color  # Set the albedo (base) color
+	
+	# Apply the material to the object
+	if object is CSGShape3D:
+		object.material = material
+	else:
+		print("Cannot apply material: Object is not a CSGShape3D")
 
 func UpdateCylinderHeight(newH: float):
 	# Update the cylinder height
