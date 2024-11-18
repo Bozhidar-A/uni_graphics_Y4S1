@@ -21,29 +21,29 @@ func _ready():
 	cone.cone = true
 	cone.height = cylinderHeight / coneLookGoodCut
 	cone.radius = 0.5
-	cone.transform.origin = calculate_offset(cylinderHeight, cone.height, true)  # Position on top
+	cone.transform.origin = CalculateDffsetFromCylinder(cylinderHeight, cone.height, true)  # Position on top
 	spawnHolderNode.add_child(cone)
 
 	# Create the box
 	box = CSGBox3D.new()
 	box.size = Vector3(1, 0.5, 1)
-	box.transform.origin = calculate_offset(cylinderHeight, box.size.y, false)  # Position at bottom
+	box.transform.origin = CalculateDffsetFromCylinder(cylinderHeight, box.size.y, false)  # Position at bottom
 	spawnHolderNode.add_child(box)
 
-func calculate_offset(cylinder_height: float, target_height: float, is_top: bool) -> Vector3:
+func CalculateDffsetFromCylinder(cylinderHeight: float, targetHeight: float, isTop: bool) -> Vector3:
 	# Calculate offset to position object on top or bottom of the cylinder
-	var offset_y = cylinder_height / 2 + target_height / 2
-	if not is_top:
-		offset_y *= -1
-	return Vector3(0, offset_y, 0)
+	var offsetY = cylinderHeight / 2 + targetHeight / 2
+	if not isTop:
+		offsetY *= -1
+	return Vector3(0, offsetY, 0)
 
-func update_cylinder_height(new_height: float):
+func UpdateCylinderHeight(newH: float):
 	# Update the cylinder height
-	cylinderHeight = new_height
+	cylinderHeight = newH
 	cylinder.height = cylinderHeight
 
 	# Update cone position
-	cone.transform.origin = calculate_offset(cylinderHeight, cone.height, true)
+	cone.transform.origin = CalculateDffsetFromCylinder(cylinderHeight, cone.height, true)
 
 	# Update box position
-	box.transform.origin = calculate_offset(cylinderHeight, box.size.y, false)
+	box.transform.origin = CalculateDffsetFromCylinder(cylinderHeight, box.size.y, false)
