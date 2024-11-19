@@ -69,7 +69,7 @@ layout_mode = 2
 text = "Cone Length: "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="PenConeLen" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenConeLenContainer" groups=["VarUIGroup"]]
+[node name="PenConeLen2" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenConeLenContainer" groups=["VarUIGroup"]]
 layout_mode = 2
 max_value = 1e+06
 update_on_text_changed = true
@@ -107,7 +107,7 @@ layout_mode = 2
 text = "Y:  "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="Light1Y" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1YContainer" groups=["VarUIGroup"]]
+[node name="Light1Y2" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1YContainer" groups=["VarUIGroup"]]
 layout_mode = 2
 max_value = 1e+06
 update_on_text_changed = true
@@ -138,10 +138,9 @@ layout_mode = 2
 text = "Direction: "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="Light2Point" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light2PointDirContainer" groups=["VarUIGroup"]]
+[node name="Light2Point2" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light2PointDirContainer" groups=["VarUIGroup"]]
 layout_mode = 2
-min_value = -359.0
-max_value = 359.0
+max_value = 1e+06
 update_on_text_changed = true
 
 [node name="Label2" type="Label" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
@@ -158,7 +157,7 @@ transform = Transform3D(0.434455, 0, 0, 0, 1, 0, 0, 0, 0.322789, -0.00790024, 0,
 shape = SubResource("BoxShape3D_uv3lt")
 
 [node name="LightSpot1" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.11561)
 spot_angle = 60.0
 
 [node name="LightSpot2" type="SpotLight3D" parent="."]

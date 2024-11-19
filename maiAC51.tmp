@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dos6qav7myn1"]
+[gd_scene load_steps=10 format=3 uid="uid://dos6qav7myn1"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_g1lok"]
 [ext_resource type="Script" path="res://camera.gd" id="2_8ixkc"]
@@ -6,6 +6,8 @@
 [ext_resource type="LabelSettings" uid="uid://bbioi4ocvpp40" path="res://ContainedLable.tres" id="3_r3j7o"]
 [ext_resource type="Theme" uid="uid://bm52tljr54dfm" path="res://main.tres" id="3_to8il"]
 [ext_resource type="LabelSettings" uid="uid://cm8axndrcrteg" path="res://SubLable.tres" id="4_p1sfl"]
+[ext_resource type="Theme" uid="uid://ycbiykmle3c2" path="res://InputTheme.tres" id="5_g0j1l"]
+[ext_resource type="Script" path="res://addons/virtual_joystick/virtual_joystick_instantiator.gd" id="7_fhwgi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uv3lt"]
 
@@ -42,10 +44,11 @@ layout_mode = 2
 text = "Lenght: "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="PenLen" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenLenContainer" groups=["VarUIGroup"]]
+[node name="PenLen" type="LineEdit" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenLenContainer" groups=["VarUIGroup"]]
 layout_mode = 2
-max_value = 1e+06
-update_on_text_changed = true
+theme = ExtResource("5_g0j1l")
+theme_override_font_sizes/font_size = 12
+placeholder_text = "NONE"
 
 [node name="PenWidthContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
 layout_mode = 2
@@ -55,11 +58,11 @@ layout_mode = 2
 text = "Width: "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="PenWidth" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenWidthContainer" groups=["VarUIGroup"]]
+[node name="PenWidth" type="LineEdit" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenWidthContainer" groups=["VarUIGroup"]]
 layout_mode = 2
-max_value = 3.0
-step = 0.1
-update_on_text_changed = true
+theme = ExtResource("5_g0j1l")
+theme_override_font_sizes/font_size = 12
+placeholder_text = "NONE"
 
 [node name="PenConeLenContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
 layout_mode = 2
@@ -69,10 +72,11 @@ layout_mode = 2
 text = "Cone Length: "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="PenConeLen" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenConeLenContainer" groups=["VarUIGroup"]]
+[node name="PenConeLen" type="LineEdit" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenConeLenContainer" groups=["VarUIGroup"]]
 layout_mode = 2
-max_value = 1e+06
-update_on_text_changed = true
+theme = ExtResource("5_g0j1l")
+theme_override_font_sizes/font_size = 12
+placeholder_text = "NONE"
 
 [node name="HSeparator" type="HSeparator" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
 layout_mode = 2
@@ -94,10 +98,11 @@ layout_mode = 2
 text = "X: "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="Light1X" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1XContainer" groups=["VarUIGroup"]]
+[node name="Light1X" type="LineEdit" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1XContainer" groups=["VarUIGroup"]]
 layout_mode = 2
-max_value = 1e+06
-update_on_text_changed = true
+theme = ExtResource("5_g0j1l")
+theme_override_font_sizes/font_size = 12
+placeholder_text = "NONE"
 
 [node name="Light1YContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
 layout_mode = 2
@@ -107,10 +112,11 @@ layout_mode = 2
 text = "Y:  "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="Light1Y" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1YContainer" groups=["VarUIGroup"]]
+[node name="Light1Y" type="LineEdit" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1YContainer" groups=["VarUIGroup"]]
 layout_mode = 2
-max_value = 1e+06
-update_on_text_changed = true
+theme = ExtResource("5_g0j1l")
+theme_override_font_sizes/font_size = 12
+placeholder_text = "NONE"
 
 [node name="Light1ZContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
 layout_mode = 2
@@ -120,10 +126,11 @@ layout_mode = 2
 text = "Z: "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="Light1Z" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1ZContainer" groups=["VarUIGroup"]]
+[node name="Light1Z" type="LineEdit" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1ZContainer" groups=["VarUIGroup"]]
 layout_mode = 2
-max_value = 1e+06
-update_on_text_changed = true
+theme = ExtResource("5_g0j1l")
+theme_override_font_sizes/font_size = 12
+placeholder_text = "NONE"
 
 [node name="Light2Lable" type="Label" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
 layout_mode = 2
@@ -138,11 +145,15 @@ layout_mode = 2
 text = "Direction: "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="Light2Point" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light2PointDirContainer" groups=["VarUIGroup"]]
+[node name="Light2Point" type="LineEdit" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light2PointDirContainer" groups=["VarUIGroup"]]
 layout_mode = 2
-min_value = -359.0
-max_value = 359.0
-update_on_text_changed = true
+theme = ExtResource("5_g0j1l")
+theme_override_font_sizes/font_size = 12
+placeholder_text = "NONE"
+
+[node name="Virtual Joystick" type="Control" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light2PointDirContainer"]
+layout_mode = 2
+script = ExtResource("7_fhwgi")
 
 [node name="Label2" type="Label" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
 layout_mode = 2
@@ -158,9 +169,7 @@ transform = Transform3D(0.434455, 0, 0, 0, 1, 0, 0, 0, 0.322789, -0.00790024, 0,
 shape = SubResource("BoxShape3D_uv3lt")
 
 [node name="LightSpot1" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
-spot_angle = 60.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.11561)
 
 [node name="LightSpot2" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0)
-spot_angle = 60.0
