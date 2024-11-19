@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dos6qav7myn1"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_g1lok"]
+[ext_resource type="Script" path="res://camera.gd" id="2_8ixkc"]
+[ext_resource type="Script" path="res://mesh_grabbable.gd" id="2_q017b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uv3lt"]
+
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("spawnHolderNode")]
+script = ExtResource("1_g1lok")
+cylinderHeight = null
+spawnHolderNode = NodePath("MeshGrabbable")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+script = ExtResource("2_8ixkc")
+
+[node name="MeshGrabbable" type="RigidBody3D" parent="."]
+gravity_scale = 0.0
+script = ExtResource("2_q017b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshGrabbable"]
+transform = Transform3D(0.434455, 0, 0, 0, 1, 0, 0, 0, 0.322789, -0.00790024, 0, 0.016865)
+shape = SubResource("BoxShape3D_uv3lt")

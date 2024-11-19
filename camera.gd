@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 		
 		self.global_transform.origin.z -= camMoveStep
 		
-	if Input.is_action_just_pressed("CamBack"):
+	if Input.is_action_pressed("CamBack"):
 		if self.global_transform.origin.z >= camMaxBack:
 			self.global_transform.origin.z = camMaxBack
 			return
