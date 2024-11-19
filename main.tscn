@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dos6qav7myn1"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_g1lok"]
+[ext_resource type="Script" path="res://FileManagment.gd" id="1_w3jlo"]
 [ext_resource type="Script" path="res://camera.gd" id="2_8ixkc"]
 [ext_resource type="Script" path="res://mesh_grabbable.gd" id="2_q017b"]
 [ext_resource type="LabelSettings" uid="uid://bbioi4ocvpp40" path="res://ContainedLable.tres" id="3_r3j7o"]
@@ -9,9 +9,7 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uv3lt"]
 
-[node name="Node3D" type="Node3D" node_paths=PackedStringArray("spawnHolderNode")]
-script = ExtResource("1_g1lok")
-spawnHolderNode = NodePath("MeshGrabbable")
+[node name="Node3D" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
@@ -42,7 +40,7 @@ layout_mode = 2
 text = "Lenght: "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="PenLen" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenLenContainer" groups=["VarUIGroup"]]
+[node name="PenLen" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenLenContainer" groups=["VarSpinBoxUIGroup"]]
 layout_mode = 2
 max_value = 1e+06
 update_on_text_changed = true
@@ -55,7 +53,7 @@ layout_mode = 2
 text = "Width: "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="PenWidth" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenWidthContainer" groups=["VarUIGroup"]]
+[node name="PenWidth" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenWidthContainer" groups=["VarSpinBoxUIGroup"]]
 layout_mode = 2
 max_value = 3.0
 step = 0.1
@@ -69,7 +67,7 @@ layout_mode = 2
 text = "Cone Length: "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="PenConeLen" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenConeLenContainer" groups=["VarUIGroup"]]
+[node name="PenConeLen" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenConeLenContainer" groups=["VarSpinBoxUIGroup"]]
 layout_mode = 2
 max_value = 1e+06
 update_on_text_changed = true
@@ -94,7 +92,7 @@ layout_mode = 2
 text = "X: "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="Light1X" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1XContainer" groups=["VarUIGroup"]]
+[node name="Light1X" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1XContainer" groups=["VarSpinBoxUIGroup"]]
 layout_mode = 2
 max_value = 1e+06
 update_on_text_changed = true
@@ -107,7 +105,7 @@ layout_mode = 2
 text = "Y:  "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="Light1Y" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1YContainer" groups=["VarUIGroup"]]
+[node name="Light1Y" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1YContainer" groups=["VarSpinBoxUIGroup"]]
 layout_mode = 2
 max_value = 1e+06
 update_on_text_changed = true
@@ -120,7 +118,7 @@ layout_mode = 2
 text = "Z: "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="Light1Z" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1ZContainer" groups=["VarUIGroup"]]
+[node name="Light1Z" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1ZContainer" groups=["VarSpinBoxUIGroup"]]
 layout_mode = 2
 max_value = 1e+06
 update_on_text_changed = true
@@ -138,7 +136,7 @@ layout_mode = 2
 text = "Direction: "
 label_settings = ExtResource("3_r3j7o")
 
-[node name="Light2Point" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light2PointDirContainer" groups=["VarUIGroup"]]
+[node name="Light2Point" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light2PointDirContainer" groups=["VarSpinBoxUIGroup"]]
 layout_mode = 2
 min_value = -359.0
 max_value = 359.0
@@ -148,6 +146,10 @@ update_on_text_changed = true
 layout_mode = 2
 text = "ESC to stop focus"
 label_settings = ExtResource("3_r3j7o")
+
+[node name="LoadNew" type="Button" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
+layout_mode = 2
+text = "Load new vals"
 
 [node name="MeshGrabbable" type="RigidBody3D" parent="."]
 gravity_scale = 0.0
@@ -164,3 +166,8 @@ spot_angle = 60.0
 [node name="LightSpot2" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0)
 spot_angle = 60.0
+
+[node name="FileDialog" type="FileDialog" parent="."]
+size = Vector2i(303, 180)
+visible = true
+script = ExtResource("1_w3jlo")

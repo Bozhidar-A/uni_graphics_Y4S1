@@ -7,7 +7,7 @@ var disabledControls = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for input:SpinBox in get_tree().get_nodes_in_group("VarUIGroup"):
+	for input:SpinBox in get_tree().get_nodes_in_group("VarSpinBoxUIGroup"):
 		#https://github.com/godotengine/godot/issues/43338#issuecomment-723680957
 		#this is beyond stupid
 		input.get_line_edit().focus_entered.connect(OnInputFocus.bind(input))

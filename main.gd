@@ -7,6 +7,7 @@ extends Node3D
 
 @onready var light1: SpotLight3D = $LightSpot1
 @onready var light2: SpotLight3D = $LightSpot2
+@onready var loadNew: Button = $Camera3D/CanvasLayer/PanelContainer/VarUI/LoadNew
 
 @onready var penLen: SpinBox = $Camera3D/CanvasLayer/PanelContainer/VarUI/PenLenContainer/PenLen
 @onready var penWidth: SpinBox = $Camera3D/CanvasLayer/PanelContainer/VarUI/PenWidthContainer/PenWidth
@@ -64,6 +65,7 @@ func _ready():
 	light1Y.value_changed.connect(OnLight1YChange.bind())
 	light1Z.value_changed.connect(OnLight1ZChange.bind())
 	light2Point.value_changed.connect(OnLight2PointChange.bind())
+	loadNew.button_pressed.connect(HandleNewValuesLoad.bind())
 	
 	#init UI vals
 	penLen.value = cylinderHeight
@@ -148,4 +150,5 @@ func OnLight1ZChange(newVal:float) -> void:
 func OnLight2PointChange(newVal:float) -> void:
 	light1.global_rotation.x = deg_to_rad(newVal)
 
+func HandleNewValuesLoad() -> void:
 	
