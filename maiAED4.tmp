@@ -1,0 +1,420 @@
+[gd_scene load_steps=8 format=3 uid="uid://dos6qav7myn1"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_g1lok"]
+[ext_resource type="Script" path="res://camera.gd" id="2_8ixkc"]
+[ext_resource type="Script" path="res://MeshGrabbable.gd" id="2_q017b"]
+[ext_resource type="LabelSettings" uid="uid://bbioi4ocvpp40" path="res://ContainedLable.tres" id="3_r3j7o"]
+[ext_resource type="Theme" uid="uid://bm52tljr54dfm" path="res://main.tres" id="3_to8il"]
+[ext_resource type="LabelSettings" uid="uid://cm8axndrcrteg" path="res://SubLable.tres" id="4_p1sfl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uv3lt"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_g1lok")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+script = ExtResource("2_8ixkc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
+
+[node name="PanelContainer" type="PanelContainer" parent="Camera3D/CanvasLayer"]
+offset_right = 167.0
+offset_bottom = 407.0
+
+[node name="VarUI" type="VBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_to8il")
+
+[node name="PenLable" type="Label" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
+layout_mode = 2
+text = "Pen"
+
+[node name="PenLenContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenLenContainer"]
+layout_mode = 2
+text = "Lenght: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="PenLen" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenLenContainer" groups=["VarSpinBoxUIGroup"]]
+layout_mode = 2
+max_value = 1e+06
+update_on_text_changed = true
+
+[node name="PenWidthContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenWidthContainer"]
+layout_mode = 2
+text = "Width: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="PenWidth" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenWidthContainer" groups=["VarSpinBoxUIGroup"]]
+layout_mode = 2
+max_value = 3.0
+step = 0.1
+update_on_text_changed = true
+
+[node name="PenConeLenContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenConeLenContainer"]
+layout_mode = 2
+text = "Cone Length: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="PenConeLen" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/PenConeLenContainer" groups=["VarSpinBoxUIGroup"]]
+layout_mode = 2
+max_value = 1e+06
+update_on_text_changed = true
+
+[node name="HSeparator" type="HSeparator" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
+layout_mode = 2
+
+[node name="LightsLable" type="Label" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
+layout_mode = 2
+text = "Lights"
+
+[node name="Light1Lable" type="Label" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
+layout_mode = 2
+text = "Light 1"
+label_settings = ExtResource("4_p1sfl")
+
+[node name="Light1XContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1XContainer"]
+layout_mode = 2
+text = "X: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="Light1X" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1XContainer" groups=["VarSpinBoxUIGroup"]]
+layout_mode = 2
+max_value = 1e+06
+update_on_text_changed = true
+
+[node name="Light1YContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1YContainer"]
+layout_mode = 2
+text = "Y:  "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="Light1Y" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1YContainer" groups=["VarSpinBoxUIGroup"]]
+layout_mode = 2
+max_value = 1e+06
+update_on_text_changed = true
+
+[node name="Light1ZContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1ZContainer"]
+layout_mode = 2
+text = "Z: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="Light1Z" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light1ZContainer" groups=["VarSpinBoxUIGroup"]]
+layout_mode = 2
+max_value = 1e+06
+update_on_text_changed = true
+
+[node name="Light2Lable" type="Label" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
+layout_mode = 2
+text = "Light 2"
+label_settings = ExtResource("4_p1sfl")
+
+[node name="Light2PointDirContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light2PointDirContainer"]
+layout_mode = 2
+text = "Direction: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="Light2Point" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer/VarUI/Light2PointDirContainer" groups=["VarSpinBoxUIGroup"]]
+layout_mode = 2
+min_value = -359.0
+max_value = 359.0
+update_on_text_changed = true
+
+[node name="Label2" type="Label" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
+layout_mode = 2
+text = "ESC to stop focus"
+label_settings = ExtResource("3_r3j7o")
+
+[node name="LoadNew" type="Button" parent="Camera3D/CanvasLayer/PanelContainer/VarUI"]
+layout_mode = 2
+text = "Load new vals"
+
+[node name="PanelContainer2" type="PanelContainer" parent="Camera3D/CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.855035
+anchor_right = 1.0
+anchor_bottom = 0.628086
+offset_bottom = -3.05176e-05
+grow_horizontal = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="VarUIHardRead" type="VBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_to8il")
+
+[node name="PenLable" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead"]
+layout_mode = 2
+text = "Pen"
+
+[node name="PenLenContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/PenLenContainer"]
+layout_mode = 2
+text = "Lenght: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="PenLenValD" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/PenLenContainer"]
+layout_mode = 2
+text = "NONE"
+label_settings = ExtResource("3_r3j7o")
+
+[node name="PenWidthContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/PenWidthContainer"]
+layout_mode = 2
+text = "Width: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="PenWidthValD" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/PenWidthContainer"]
+layout_mode = 2
+text = "NONE"
+label_settings = ExtResource("3_r3j7o")
+
+[node name="PenConeLenContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/PenConeLenContainer"]
+layout_mode = 2
+text = "Cone Length: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="PenConeLenValD" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/PenConeLenContainer"]
+layout_mode = 2
+text = "NONE"
+label_settings = ExtResource("3_r3j7o")
+
+[node name="HSeparator" type="HSeparator" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead"]
+layout_mode = 2
+
+[node name="LightsLable" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead"]
+layout_mode = 2
+text = "Lights"
+
+[node name="Light1Lable" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead"]
+layout_mode = 2
+text = "Light 1"
+label_settings = ExtResource("4_p1sfl")
+
+[node name="Light1XContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light1XContainer"]
+layout_mode = 2
+text = "X: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="Light1XValD" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light1XContainer"]
+layout_mode = 2
+text = "NONE"
+label_settings = ExtResource("3_r3j7o")
+
+[node name="Light1YContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light1YContainer"]
+layout_mode = 2
+text = "Y:  "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="Light1YValD" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light1YContainer"]
+layout_mode = 2
+text = "NONE"
+label_settings = ExtResource("3_r3j7o")
+
+[node name="Light1ZContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light1ZContainer"]
+layout_mode = 2
+text = "Z: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="Light1ZValD" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light1ZContainer"]
+layout_mode = 2
+text = "NONE"
+label_settings = ExtResource("3_r3j7o")
+
+[node name="Light2Lable" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead"]
+layout_mode = 2
+text = "Light 2"
+label_settings = ExtResource("4_p1sfl")
+
+[node name="Light2PointDirContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer"]
+layout_mode = 2
+text = "Direction: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="Light2PointValD" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer"]
+layout_mode = 2
+text = "NONE"
+label_settings = ExtResource("3_r3j7o")
+
+[node name="VarUI" type="VBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD"]
+size_flags_horizontal = 0
+theme = ExtResource("3_to8il")
+
+[node name="PenLable" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI"]
+layout_mode = 2
+text = "Pen"
+
+[node name="PenLenContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI/PenLenContainer"]
+layout_mode = 2
+text = "Lenght: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="PenLen" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI/PenLenContainer" groups=["VarSpinBoxUIGroup"]]
+layout_mode = 2
+max_value = 1e+06
+update_on_text_changed = true
+
+[node name="PenWidthContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI/PenWidthContainer"]
+layout_mode = 2
+text = "Width: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="PenWidth" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI/PenWidthContainer" groups=["VarSpinBoxUIGroup"]]
+layout_mode = 2
+max_value = 3.0
+step = 0.1
+update_on_text_changed = true
+
+[node name="PenConeLenContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI/PenConeLenContainer"]
+layout_mode = 2
+text = "Cone Length: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="PenConeLen" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI/PenConeLenContainer" groups=["VarSpinBoxUIGroup"]]
+layout_mode = 2
+max_value = 1e+06
+update_on_text_changed = true
+
+[node name="HSeparator" type="HSeparator" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI"]
+layout_mode = 2
+
+[node name="LightsLable" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI"]
+layout_mode = 2
+text = "Lights"
+
+[node name="Light1Lable" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI"]
+layout_mode = 2
+text = "Light 1"
+label_settings = ExtResource("4_p1sfl")
+
+[node name="Light1XContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI/Light1XContainer"]
+layout_mode = 2
+text = "X: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="Light1X" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI/Light1XContainer" groups=["VarSpinBoxUIGroup"]]
+layout_mode = 2
+max_value = 1e+06
+update_on_text_changed = true
+
+[node name="Light1YContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI/Light1YContainer"]
+layout_mode = 2
+text = "Y:  "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="Light1Y" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI/Light1YContainer" groups=["VarSpinBoxUIGroup"]]
+layout_mode = 2
+max_value = 1e+06
+update_on_text_changed = true
+
+[node name="Light1ZContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI/Light1ZContainer"]
+layout_mode = 2
+text = "Z: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="Light1Z" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI/Light1ZContainer" groups=["VarSpinBoxUIGroup"]]
+layout_mode = 2
+max_value = 1e+06
+update_on_text_changed = true
+
+[node name="Light2Lable" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI"]
+layout_mode = 2
+text = "Light 2"
+label_settings = ExtResource("4_p1sfl")
+
+[node name="Light2PointDirContainer" type="HBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI/Light2PointDirContainer"]
+layout_mode = 2
+text = "Direction: "
+label_settings = ExtResource("3_r3j7o")
+
+[node name="Light2Point" type="SpinBox" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI/Light2PointDirContainer" groups=["VarSpinBoxUIGroup"]]
+layout_mode = 2
+min_value = -359.0
+max_value = 359.0
+update_on_text_changed = true
+
+[node name="Label2" type="Label" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI"]
+layout_mode = 2
+text = "ESC to stop focus"
+label_settings = ExtResource("3_r3j7o")
+
+[node name="LoadNew" type="Button" parent="Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD/VarUI"]
+layout_mode = 2
+text = "Load new vals"
+
+[node name="MeshGrabbable" type="RigidBody3D" parent="."]
+gravity_scale = 0.0
+script = ExtResource("2_q017b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshGrabbable"]
+transform = Transform3D(0.434455, 0, 0, 0, 1, 0, 0, 0, 0.322789, -0.00790024, 0, 0.016865)
+shape = SubResource("BoxShape3D_uv3lt")
+
+[node name="LightSpot1" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+spot_angle = 60.0
+
+[node name="LightSpot2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0)
+spot_angle = 60.0

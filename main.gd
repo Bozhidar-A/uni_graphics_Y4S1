@@ -3,11 +3,12 @@ extends Node3D
 @export var cylinderHeight: float = 2
 @export var cylinderWidth: float = 0.5
 @export var coneHeight: float = 1
-@export var spawnHolderNode: Node3D
 
+@onready var spawnHolderNode: RigidBody3D = $MeshGrabbable
 @onready var light1: SpotLight3D = $LightSpot1
 @onready var light2: SpotLight3D = $LightSpot2
 @onready var loadNew: Button = $Camera3D/CanvasLayer/PanelContainer/VarUI/LoadNew
+@onready var nativeDialog: NativeFileDialog = NativeFileDialog.new()
 
 @onready var penLen: SpinBox = $Camera3D/CanvasLayer/PanelContainer/VarUI/PenLenContainer/PenLen
 @onready var penWidth: SpinBox = $Camera3D/CanvasLayer/PanelContainer/VarUI/PenWidthContainer/PenWidth
@@ -23,6 +24,22 @@ const colorMAGENTA = Color(0.6,0,0.6)
 var cylinder: CSGCylinder3D
 var cone: CSGCylinder3D
 var topBall: CSGSphere3D
+
+#holder vars
+var light1XVal: float
+var light1YVal: float
+var light1ZVal: float
+var light2PointVal: float
+
+#debug lables
+@onready var penLenDebug: Label = $Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/PenLenContainer/PenLenValD
+@onready var penWidthDebug: Label = $Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/PenWidthContainer/PenWidthValD
+@onready var penConeLenDebug: Label = $Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/PenConeLenContainer/PenConeLenValD
+@onready var light1XDebug: Label = $Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light1XContainer/Light1XValD
+@onready var light1YDebug: Label = $Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light1YContainer/Light1YValD
+@onready var light1ZDebug: Label = $Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light1ZContainer/Light1ZValD
+@onready var light2PointDebug: Label = $Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/Light2PointDirContainer/Light2PointValD
+
 
 func _ready():
 	# Create the cylinder
@@ -57,6 +74,12 @@ func _ready():
 	#rotate the holder so it looks closer to the example on spawn
 	spawnHolderNode.rotate_object_local(Vector3(0,0,1), deg_to_rad(35))
 	
+	#init holder vals
+	light1XVal = light1.global_transform.origin.x
+	light1YVal = light1.global_transform.origin.y
+	light1ZVal = light1.global_transform.origin.z
+	light2PointVal = rad_to_deg(light2.global_rotation.x)
+	
 	#connect UI
 	penLen.value_changed.connect(OnPenLenChange.bind())
 	penWidth.value_changed.connect(OnPenWidthChange.bind())
@@ -65,16 +88,39 @@ func _ready():
 	light1Y.value_changed.connect(OnLight1YChange.bind())
 	light1Z.value_changed.connect(OnLight1ZChange.bind())
 	light2Point.value_changed.connect(OnLight2PointChange.bind())
-	loadNew.button_pressed.connect(HandleNewValuesLoad.bind())
+	loadNew.pressed.connect(OpenFileDialog.bind())
 	
 	#init UI vals
 	penLen.value = cylinderHeight
 	penWidth.value = cylinderWidth
 	penConeLen.value = coneHeight
-	light1X.value = light1.global_transform.origin.x
-	light1Y.value = light1.global_transform.origin.y
-	light1Z.value = light1.global_transform.origin.z
-	light2Point.value = rad_to_deg(light2.global_rotation.x)
+	light1X.value = light1XVal
+	light1Y.value = light1YVal
+	light1Z.value = light1ZVal
+	light2Point.value = light2PointVal
+	
+	#non-ui sognal management
+	#https://github.com/98teg/NativeDialogs/issues/34
+	#this gave me working code
+	#FOR SOME REASON this will spawn BUT NOT FIRE signals unless I spawn it like this
+	#no clue
+	nativeDialog.file_mode = NativeFileDialog.FILE_MODE_OPEN_FILE
+	nativeDialog.access =NativeFileDialog.ACCESS_FILESYSTEM
+	nativeDialog.add_filter("*.png, *.jpg")
+	nativeDialog.file_selected.connect(ReadFromFileAndSet)
+	self.add_child(nativeDialog)
+	#nativeDialog.show()
+	
+func _process(delta: float) -> void:
+	#performance? never heard of it
+	#this is beyond catastrophically bad, but i want real time updates
+	penLenDebug.text = str(cylinder.height)
+	penWidthDebug.text = str(cylinder.radius)
+	penConeLenDebug.text = str(cone.height)
+	light1XDebug.text = str(light1.global_position.x)
+	light1YDebug.text = str(light1.global_position.y)
+	light1ZDebug.text = str(light1.global_position.z)
+	light2PointDebug.text = str(rad_to_deg(light2.global_rotation.x))
 
 func CalculateDffsetFromCylinder(cylinderHeight: float, targetHeight: float, isTop: bool, includeTargetHeight: bool) -> Vector3:
 	# Calculate offset to position object on top or bottom of the cylinder
@@ -139,16 +185,59 @@ func OnPenConeLenChange(newVal:float) -> void:
 	cone.transform.origin = CalculateDffsetFromCylinder(cylinderHeight, cone.height, false, true)
 	
 func OnLight1XChange(newVal:float) -> void:
-	light1.global_position.x = newVal
+	light1XVal = newVal
+	light1.global_position.x = light1XVal
 	
 func OnLight1YChange(newVal:float) -> void:
-	light1.global_position.y = newVal
+	light1YVal = newVal
+	light1.global_position.y = light1YVal
 
 func OnLight1ZChange(newVal:float) -> void:
-	light1.global_position.z = newVal
+	light1ZVal = newVal
+	light1.global_position.z = light1ZVal
 	
 func OnLight2PointChange(newVal:float) -> void:
-	light1.global_rotation.x = deg_to_rad(newVal)
+	light2PointVal = deg_to_rad(newVal)
+	light2.global_rotation.x = light2PointVal
 
-func HandleNewValuesLoad() -> void:
+func OpenFileDialog() -> void:
+	nativeDialog.show()
 	
+func ReadFromFileAndSet(path:String) -> void:
+	var fileData = FileManagement.LoadFromFile(path)
+	fileData = fileData.split("\n")
+	print(fileData)
+	
+	#there is no fancy file format, just raw data
+	#val meanings in row
+	#1-PenLen,2-PenWidth,3-PenConeLen,4-Light1X,5-Light1Y,6-Light1Z,7-Light2PointDegrees
+	
+	if fileData.size() < 7:
+		print("Ïnvalid size")
+		return
+	
+	#godot doesnt have try/catch and i cant aggressively fail :(
+	var validFloats = []
+	for i in fileData:
+		if str(i).is_valid_float():
+			validFloats.append(i.to_float())
+		else:
+			print("supplied invalid data")
+			return
+	print(validFloats)
+	
+	OnPenLenChange(validFloats[0])
+	penLen.value = validFloats[0]
+	OnPenWidthChange(validFloats[1])
+	penWidth.value = validFloats[1]
+	OnPenConeLenChange(validFloats[2])
+	penConeLen.value = validFloats[2]
+	OnLight1XChange(validFloats[3])
+	light1X.value = validFloats[3]
+	OnLight1YChange(validFloats[4])
+	light1Y.value = validFloats[4]
+	OnLight1ZChange(validFloats[5])
+	light1Z.value = validFloats[5]
+	OnLight2PointChange(validFloats[6])
+	light2Point.value = validFloats[6]
+	#this is catastrophically bad but it doesnt need to be more complex
