@@ -29,7 +29,7 @@ var topBall: CSGSphere3D
 var light1XVal: float
 var light1YVal: float
 var light1ZVal: float
-var light2PointVal: float
+var light2PointVal: float #in deg
 
 #debug lables
 @onready var penLenDebug: Label = $Camera3D/CanvasLayer/PanelContainer2/VarUIHardRead/PenLenContainer/PenLenValD
@@ -78,7 +78,7 @@ func _ready():
 	light1XVal = light1.global_transform.origin.x
 	light1YVal = light1.global_transform.origin.y
 	light1ZVal = light1.global_transform.origin.z
-	light2PointVal = rad_to_deg(light2.global_rotation.x)
+	light2PointVal = rad_to_deg(light2.rotation.x)
 	
 	#connect UI
 	penLen.value_changed.connect(OnPenLenChange.bind())
@@ -120,7 +120,7 @@ func _process(delta: float) -> void:
 	light1XDebug.text = str(light1.global_position.x)
 	light1YDebug.text = str(light1.global_position.y)
 	light1ZDebug.text = str(light1.global_position.z)
-	light2PointDebug.text = str(rad_to_deg(light2.global_rotation.x))
+	light2PointDebug.text = str(round(rad_to_deg(light2.rotation.x)))
 
 func CalculateDffsetFromCylinder(cylinderHeight: float, targetHeight: float, isTop: bool, includeTargetHeight: bool) -> Vector3:
 	# Calculate offset to position object on top or bottom of the cylinder
@@ -197,8 +197,8 @@ func OnLight1ZChange(newVal:float) -> void:
 	light1.global_position.z = light1ZVal
 	
 func OnLight2PointChange(newVal:float) -> void:
-	light2PointVal = deg_to_rad(newVal)
-	light2.global_rotation.x = light2PointVal
+	light2PointVal = newVal
+	light2.rotation.x = deg_to_rad(light2PointVal) 
 
 func OpenFileDialog() -> void:
 	nativeDialog.show()
