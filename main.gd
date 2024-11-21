@@ -106,7 +106,7 @@ func _ready():
 	#no clue
 	nativeDialog.file_mode = NativeFileDialog.FILE_MODE_OPEN_FILE
 	nativeDialog.access =NativeFileDialog.ACCESS_FILESYSTEM
-	nativeDialog.add_filter("*.png, *.jpg")
+	nativeDialog.add_filter("*.txt")
 	nativeDialog.file_selected.connect(ReadFromFileAndSet)
 	self.add_child(nativeDialog)
 	#nativeDialog.show()
@@ -212,9 +212,12 @@ func ReadFromFileAndSet(path:String) -> void:
 	#val meanings in row
 	#1-PenLen,2-PenWidth,3-PenConeLen,4-Light1X,5-Light1Y,6-Light1Z,7-Light2PointDegrees
 	
-	if fileData.size() < 7:
-		print("Ïnvalid size")
+	if fileData.size() > 8:
+		print("Invalid size")
 		return
+	
+	if fileData.size() == 8 and fileData[7] == "":
+		fileData.remove_at(7)	
 	
 	#godot doesnt have try/catch and i cant aggressively fail :(
 	var validFloats = []

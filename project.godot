@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 FileManagement="*res://FileManagement.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/native_dialogs/plugin.cfg")

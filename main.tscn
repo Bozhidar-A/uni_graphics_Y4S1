@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://main.gd" id="1_g1lok"]
 [ext_resource type="Script" path="res://camera.gd" id="2_8ixkc"]
 [ext_resource type="Script" path="res://MeshGrabbable.gd" id="2_q017b"]
-[ext_resource type="LabelSettings" uid="uid://bbioi4ocvpp40" path="res://ContainedLable.tres" id="3_r3j7o"]
-[ext_resource type="Theme" uid="uid://bm52tljr54dfm" path="res://main.tres" id="3_to8il"]
-[ext_resource type="LabelSettings" uid="uid://cm8axndrcrteg" path="res://SubLable.tres" id="4_p1sfl"]
+[ext_resource type="LabelSettings" path="res://ContainedLable.tres" id="3_r3j7o"]
+[ext_resource type="Theme" path="res://main.tres" id="3_to8il"]
+[ext_resource type="LabelSettings" path="res://SubLable.tres" id="4_p1sfl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uv3lt"]
 
@@ -151,13 +151,12 @@ layout_mode = 2
 text = "Load new vals"
 
 [node name="PanelContainer2" type="PanelContainer" parent="Camera3D/CanvasLayer"]
-anchors_preset = -1
-anchor_left = 0.855035
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 0.628086
-offset_bottom = -3.05176e-05
+offset_left = -119.0
+offset_bottom = 253.0
 grow_horizontal = 0
-metadata/_edit_use_anchors_ = true
 
 [node name="VarUIHardRead" type="VBoxContainer" parent="Camera3D/CanvasLayer/PanelContainer2"]
 layout_mode = 2
